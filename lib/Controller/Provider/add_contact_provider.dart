@@ -6,7 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 
 import '../../View/Android/add_contact_android.dart';
-
+import '../../util.dart';
 
 class ContactProvider extends ChangeNotifier {
   XFile? xFile;
@@ -26,20 +26,6 @@ class ContactProvider extends ChangeNotifier {
   TimeOfDay? selecttime;
 
   void addcontact(ContactModal contact) {
-    // contactlist.add(contact);
-    // ContactList contactList = ContactList(contactList: [
-    //     ContactListElement(
-    //     name: nameController.text,
-    //     number: phoneController.text,
-    //     chat: chatController.text,
-    //     selectdate: selectdate.toString(),
-    //     selecttime: selecttime.toString(),
-    //     xFile: xFile.toString(),
-    // ),
-    // ]);
-    //
-    // var rawJson = contactList.toRawJson();
-    // prefs.setString("model", rawJson);
     contactList.add(
       ContactModal(
           name: nameController.text,
@@ -72,17 +58,12 @@ class ContactProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void editContact(int index, ContactModal contact) {
-    // contactlist[index] = contact;
-    notifyListeners();
-  }
-
   void refresh() {
     notifyListeners();
   }
 
   void deleteContact(int index) {
-    // contactlist.removeAt(index);
+    contactList.removeAt(index);
     notifyListeners();
   }
 }

@@ -25,4 +25,12 @@ class SharedPreferencesHelper {
       return [];
     }
   }
+  static Future<void> deleteContact(int index) async {
+    List<ContactModal> contactList = await getContactList();
+
+    if (index >= 0 && index < contactList.length) {
+      contactList.removeAt(index);
+      await saveContactList(contactList);
+    }
+  }
 }

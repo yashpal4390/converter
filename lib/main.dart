@@ -1,8 +1,8 @@
 import 'dart:io';
-
 import 'package:converter/Controller/Provider/add_contact_provider.dart';
-import 'package:converter/Model/add_contact_model.dart';
 import 'package:converter/View/Android/home_page_android.dart';
+import 'package:converter/View/IOS/home_page_ios.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -15,18 +15,10 @@ import 'Model/profile_switch_model.dart';
 import 'Model/theme_model.dart';
 
 late SharedPreferences prefs;
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  prefs=await SharedPreferences.getInstance();
-  // SharedPreferences prefs = await SharedPreferences.getInstance();
-
-
-  List<String> image = prefs.getStringList('image') ?? [];
-  List<String> fullName = prefs.getStringList('fullName') ?? [];
-  List<String> phoneNumber = prefs.getStringList('phoneNumber') ?? [];
-  List<String> chatConversation = prefs.getStringList('chatConversation') ?? [];
-  List<String> date = prefs.getStringList('date') ?? [];
-  List<String> time = prefs.getStringList('time') ?? [];
+  prefs = await SharedPreferences.getInstance();
 
   bool profileSwitch = prefs.getBool('profileSwitch') ?? false;
   String userImage = prefs.getString('userImage') ?? '';
@@ -69,8 +61,7 @@ void main() async {
         ),
       ],
       builder: (context, child) {
-        return
-            // Android IOS Condition Applied Here
+        return (Provider.of<AppProvider>(context).appModel.switchValue == false)?
             MaterialApp(
           darkTheme: ThemeData.dark(
             useMaterial3: true,
@@ -78,13 +69,23 @@ void main() async {
           theme: ThemeData.light(
             useMaterial3: true,
           ),
-          themeMode:
-          (Provider.of<ThemeProvider>(context).themeModel.isDark)
+          themeMode: (Provider.of<ThemeProvider>(context).themeModel.isDark)
               ? ThemeMode.dark
               : ThemeMode.light,
           debugShowCheckedModeBanner: false,
           routes: {
-            '/': (context) => const homepage(),
+            '/': (context) => const home_page_android(),
+          },
+        ): CupertinoApp(
+          theme: CupertinoThemeData(
+            brightness:
+            (Provider.of<ThemeProvider>(context).themeModel.isDark)
+                ? Brightness.dark
+                : Brightness.light,
+          ),
+          debugShowCheckedModeBanner: false,
+          routes: {
+            '/': (context) => home_page_ios(),
           },
         );
       },

@@ -8,16 +8,22 @@ import 'package:provider/provider.dart';
 import '../../Controller/Provider/app_provider.dart';
 import 'add_contact_android.dart';
 
-class homepage extends StatefulWidget {
-  const homepage({super.key});
+class home_page_android extends StatefulWidget {
+  const home_page_android({super.key});
 
   @override
-  State<homepage> createState() => _homepageState();
+  State<home_page_android> createState() => _home_page_androidState();
 }
 
-class _homepageState extends State<homepage> {
+class _home_page_androidState extends State<home_page_android> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
+
     return   DefaultTabController(
       length: 4,
       child: Scaffold(

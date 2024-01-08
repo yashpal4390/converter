@@ -3,6 +3,7 @@
 Project Features:
 - Profile management functionality
 - Add contact functionality with image and date/time pickers
+- Contact Save Functionality using Local Storage
 - App switching functionality (From Material to Human Interface and vice versa)
 - Call functionality
 - Edit & Delete contact functionality
